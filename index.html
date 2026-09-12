@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>For Izel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- grain overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============================================================ -->
+<!-- 1. INTRO -->
+<!-- ============================================================ -->
+<section id="intro" class="screen intro-screen">
+  <div class="intro-inner">
+    <p class="eyebrow-note">a little something for you</p>
+    <h1 class="intro-headline">
+      <span>One more</span>
+      <span class="year-word">year.</span>
+    </h1>
+    <p class="intro-sub">one more chapter.</p>
+    <div class="spark">✦</div>
+    <p class="made-for">made especially for you</p>
+    <button id="enterBtn" class="enter-btn">Enter</button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 2. COUNTDOWN -->
+<!-- ============================================================ -->
+<section id="countdown" class="screen countdown-screen" hidden>
+  <div class="countdown-number" id="countdownNumber">3</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 3. STORY (SVG animated film) -->
+<!-- ============================================================ -->
+<section id="story" class="screen story-screen" hidden>
+  <div class="story-stage">
+    <svg id="storySvg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="softLight" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#FBF7F2" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#F5EDE5" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- environment layer -->
+      <g id="envLayer"></g>
+
+      <!-- particles layer -->
+      <g id="particleLayer"></g>
+
+      <!-- sun/light -->
+      <circle id="sunLight" cx="650" cy="90" r="120" fill="url(#softLight)"></circle>
+
+      <!-- character: girl (grows through story) -->
+      <g id="girl" transform="translate(400,430) scale(1)">
+        <!-- body will be built by JS per stage -->
+      </g>
+
+      <!-- character: friend -->
+      <g id="friend" transform="translate(950,430) scale(1)" opacity="0"></g>
+
+    </svg>
+
+    <div class="story-caption" id="storyCaption"></div>
+    <div class="story-date" id="storyDate"></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 6. BIRTHDAY REVEAL -->
+<!-- ============================================================ -->
+<section id="reveal" class="screen reveal-screen" hidden>
+  <div class="reveal-particles" id="revealParticles"></div>
+  <h2 class="reveal-happy">Happy Birthday</h2>
+  <h1 class="reveal-name">Izelllll!</h1>
+</section>
+
+<!-- ============================================================ -->
+<!-- MAIN SITE (scrolling) -->
+<!-- ============================================================ -->
+<main id="mainSite" hidden>
+
+  <!-- MUSIC PLAYER -->
+  <div class="music-player" id="musicPlayer">
+    <button id="playPauseBtn" class="music-btn" aria-label="Play music">
+      <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <div class="music-indicator" id="musicIndicator">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="volume-wrap">
+      <button id="muteBtn" class="music-btn small" aria-label="Mute">
+        <svg class="icon-vol" viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"/></svg>
+        <svg class="icon-mute" viewBox="0 0 24 24" hidden><path d="M4 9v6h4l5 5V4L8 9H4zm14.5 3l2.5 2.5-1.4 1.4L17.1 13.4l-2.5 2.5-1.4-1.4 2.5-2.5-2.5-2.5 1.4-1.4 2.5 2.5 2.5-2.5 1.4 1.4-2.5 2.5z"/></svg>
+      </button>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
+    </div>
+    <audio id="bgAudio" loop preload="none"></audio>
+  </div>
+
+  <!-- 7. LETTER -->
+  <section class="section letter-section" id="letterSection">
+    <div class="section-inner">
+      <p class="section-kicker" id="letterKicker">for you, Izel.</p>
+      <div class="letter-paper" id="letterBody"></div>
+      <p class="letter-sign" id="letterSign"></p>
+    </div>
+  </section>
+
+  <!-- 8. MEMORIES -->
+  <section class="section memories-section" id="memoriesSection">
+    <div class="section-inner wide">
+      <h2 class="section-heading" id="memoriesHeading">Our memories</h2>
+      <p class="section-subtext" id="memoriesSubtext"></p>
+      <div class="scrapbook" id="scrapbook"></div>
+    </div>
+  </section>
+
+  <!-- 10. THINGS I LOVE -->
+  <section class="section love-section" id="loveSection">
+    <div class="section-inner">
+      <h2 class="section-heading" id="loveHeading">Things I love about you</h2>
+      <div class="love-cards" id="loveCards"></div>
+    </div>
+  </section>
+
+  <!-- 11. FINAL SECRET -->
+  <section class="section secret-section" id="secretSection">
+    <div class="section-inner narrow">
+      <p class="secret-pre" id="secretPre">Before we end...</p>
+      <p class="secret-line" id="secretLine">I wanna say something.</p>
+      <button class="secret-btn" id="secretBtn">Click to know</button>
+      <div class="secret-spark" id="secretSpark" hidden>✦</div>
+      <div class="secret-message" id="secretMessage" hidden></div>
+    </div>
+  </section>
+
+  <!-- 12. END -->
+  <section class="section end-section" id="endSection">
+    <div class="end-spark">✦</div>
+    <p class="end-text">Made with love, just for you.</p>
+  </section>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
